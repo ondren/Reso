@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274699892980",
+    "project_id": "sampoprog-a7064",
+    "storage_bucket": "sampoprog-a7064.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274699892980:android:269639163748bc157f06a1",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274699892980-roleo9ni5ao3kdih6v5jq5fcdnlqs26n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcRbc-9CIYFgz6Vwh4mTEnFSlsuAqtu18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274699892980-roleo9ni5ao3kdih6v5jq5fcdnlqs26n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
