@@ -41,14 +41,14 @@ public class QRTablesActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         code = getIntent().getStringExtra("code");
-
+        String table_code = data.getStringExtra("table");
         if (data == null) {return;}
         if (resultCode == RESULT_OK && requestCode == 209){
-            System.out.println("code in QRTablesActivity = " + code +  " table_no = " + table_no);
+            System.out.println("code in QRTablesActivity = " + code +  " table_no = " + table_code);
             ApiAccess.setContext(this);
             HashMap<String, String> params = new HashMap<>();
             params.put("code", code);
-            params.put("order", table_no);
+            params.put("table", table_code);
             ApiAccess.get("qr/tables/set", params,
                     response -> {
                         try {
@@ -77,18 +77,20 @@ public class QRTablesActivity extends Activity {
                     try {
                         JSONArray JSONArray_tables = response.getJSONArray("tables");
                         for (int i = 0; i < JSONArray_tables.length(); i++){
-                            table_no = JSONArray_tables.get(i).toString();
                             System.out.println("table nO " + JSONArray_tables.get(i));
                             final Button table_btn = new Button(this);
                             table_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                             table_btn.setId(i);
                             JSONObject table = JSONArray_tables.getJSONObject(i);
                             String tableName = "Место " + table.getString("name");
+                            String table_code = table.getString("name");
                             table_btn.setText(tableName);
                             table_btn.setGravity(Gravity.CENTER);
                             layout.addView(table_btn);
                             table_btn.setOnClickListener(view -> {
+
                                 Intent intent = new Intent(QRTablesActivity.this, YesNoActivity.class);
+                                intent.putExtra("table", table_code);
                                 startActivityForResult(intent, 209);
 
                             });
