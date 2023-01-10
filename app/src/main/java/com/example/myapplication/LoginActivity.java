@@ -96,7 +96,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        System.out.println("Login"+"Activity " + " is working");
+        System.out.println("Login "+"Activity " + " is working");
         RequestQueue queue = Volley.newRequestQueue(this);
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
 //        this.setContentView(binding.getRoot());
