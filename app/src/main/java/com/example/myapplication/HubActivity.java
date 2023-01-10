@@ -50,6 +50,8 @@ public class HubActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hub_activity);
         RequestQueue queue = Volley.newRequestQueue(this);
+        startService(new Intent(this, MyService.class)); //start service which is MyService.java
+
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
 //        this.setContentView(binding.getRoot());
         Button exit_but = findViewById(R.id.exit_btn);
@@ -63,26 +65,7 @@ public class HubActivity extends Activity {
         tables_but.setOnClickListener(onClick);
 
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            System.out.println("Fetching FCM registration token failed");
-                            return;
-                        }
 
-                        // Get new FCM registration token
-                        String firebase_token = task.getResult();
-
-                        // Log and toast
-                        System.out.println("your token is "+firebase_token);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("firebase_token",firebase_token);
-                        editor.commit();
-
-                    }
-                });
     }
 
 }
