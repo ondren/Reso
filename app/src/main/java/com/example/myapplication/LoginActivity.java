@@ -9,8 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +27,8 @@ public class LoginActivity extends Activity {
     EditText password_et;
     SharedPreferences sp;
 
+    
+
 
     public View.OnClickListener onClick = new View.OnClickListener() {
         @Override
@@ -31,6 +38,11 @@ public class LoginActivity extends Activity {
                 try {
                     jsonBody.put("login", login_et.getText().toString());
                     jsonBody.put("password", password_et.getText().toString());
+
+                    ApiAccess.setContext(LoginActivity.this);
+                    String str = ApiAccess.getFirebaseToken();
+                    jsonBody.put("token", str);
+
                 } catch (Exception ex){
 
                 }
@@ -56,44 +68,7 @@ public class LoginActivity extends Activity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
-                                // If you want to retrieve saved token:
-                                //
-                                //   String token = sp.getString("token","");
 
-
-                                //Getting users data we need such as users phone numbers:
-//                            ApiAccess.get("users/get",
-//                                response -> {
-//
-//                                    try {
-//
-//                                        JSONArray JSONArray_users = response.getJSONArray("users");
-//                                        for (int i = 0; i < JSONArray_users.length(); i++) {
-//                                            JSONObject j = JSONArray_users.getJSONObject(i);
-//                                            String phone = j.getString("phone");
-//                                            System.out.println(phone.toString());
-//                                        }
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            );
-
-
-//                            ApiAccess.setContext(MainActivity.this);
-//                            ApiAccess.setToken(token);
-
-
-//                            Intent intent = new Intent(MainActivity.this , SecondActivity.class);
-//                            startActivity(intent);
-
-
-//                            Toast.makeText(
-//                                    MainActivity.this,
-//                                    myPreferences.getString("token", "no token!"),
-//                                    Toast.LENGTH_SHORT
-//                                ).show();
-//                            finish();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -130,6 +105,25 @@ public class LoginActivity extends Activity {
         login_et = findViewById(R.id.login_et);
         password_et = findViewById(R.id.password_et);
         sp = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            System.out.println("Fetching FCM registration token failed");
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String firebase_token = task.getResult();
+                        ApiAccess.setContext(LoginActivity.this);
+                        ApiAccess.setFirebaseToken(firebase_token);
+
+
+
+                    }
+                });
 
     }
 

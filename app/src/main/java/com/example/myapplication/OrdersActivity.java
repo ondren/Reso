@@ -57,6 +57,7 @@ public class OrdersActivity extends Activity {
                         intent.putExtra("code",code);
                         intent.putExtra("order_id",order_id);
                         startActivityForResult(intent, 208);
+                        int v;
 
                     });
                 }

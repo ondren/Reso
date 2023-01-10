@@ -59,6 +59,12 @@ public class ApiAccess {
         String token = myPreferences.getString("token", "");
         return token;
     }
+    public static String getFirebaseToken() {
+        SharedPreferences myPreferences
+                = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String token = myPreferences.getString("firebase_token", "");
+        return token;
+    }
     public static String getPlace() {
         SharedPreferences myPreferences
                 = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -71,6 +77,13 @@ public class ApiAccess {
         SharedPreferences.Editor myEditor = myPreferences.edit();
         myEditor.putString("token", token);
         myEditor.putString("place", place);
+        myEditor.commit();
+    }
+    public static void setFirebaseToken(String token) {
+        SharedPreferences myPreferences
+                = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor myEditor = myPreferences.edit();
+        myEditor.putString("firebase_token", token);
         myEditor.commit();
     }
     public static boolean hasToken(){
