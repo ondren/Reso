@@ -39,6 +39,10 @@ public class HubActivity extends Activity {
                 Intent intent = new Intent(HubActivity.this, QrActivity.class);
                 startActivity(intent);
             }
+            if (view.getId() == R.id.chat_btn){
+                Intent intent = new Intent(HubActivity.this, MessagesActivity.class);
+                startActivity(intent);
+            }
         }
 
 

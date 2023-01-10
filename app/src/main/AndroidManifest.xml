@@ -49,6 +49,13 @@
             android:exported="false"
             android:label="Tables">
         </activity>
+
+        <activity
+            android:name=".MessagesActivity"
+            android:exported="false"
+            android:label="Messages">
+        </activity>
+
         <activity
             android:name=".QRSettingsActivity"
             android:exported="false"
