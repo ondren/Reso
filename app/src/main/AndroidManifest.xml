@@ -58,6 +58,12 @@
         </activity>
 
         <activity
+            android:name=".MessageConfirmActivity"
+            android:exported="true"
+            android:label="Message Confirm">
+        </activity>
+
+        <activity
             android:name=".QRSettingsActivity"
             android:exported="false"
             android:label="QR Settings">

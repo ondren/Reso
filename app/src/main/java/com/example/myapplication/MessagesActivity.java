@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -12,10 +13,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import api.ApiAccess;
 
 public class MessagesActivity extends Activity {
     LinearLayout layout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,39 @@ public class MessagesActivity extends Activity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String message_code = data.getStringExtra("message_code");
+        if (data == null) {return;}
+        if (resultCode == RESULT_OK && requestCode == 202){
+            System.out.println("message_code in MessagesActivity is: " + message_code);
+
+            ApiAccess.setContext(this);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("code", message_code);
+            ApiAccess.get("users/messages/confirm", params,
+                    response -> {
+
+                        try {
+                            String result = response.getString("message");
+
+                            System.out.println(result);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    });
+
+            setResult(RESULT_OK, data);
+
+            System.out.println("Result ok ");
+            finish();
+            startActivity(getIntent());
+            redraw();
+        }
+
+    }
+
     void redraw(){
         ApiAccess.setContext(this);
         ApiAccess.get("users/messages",
@@ -48,12 +85,21 @@ public class MessagesActivity extends Activity {
                             JSONObject message = JSONArray_messages.getJSONObject(i);
                             String message_text = message.getString("message");
                             String message_code = message.getString("code");
+                            String message_date = message.getString("created_at");
                             System.out.println("message code is " + message_code);
                             System.out.println("message text is  " + message_text);
+                            System.out.println("message date is  " + message_date);
+
                             message_btn.setText(message_text);
                             message_btn.setGravity(Gravity.CENTER);
                             layout.addView(message_btn);
                             message_btn.setOnClickListener(view -> {
+                                Intent intent = new Intent(MessagesActivity.this, MessageConfirmActivity.class);
+                                intent.putExtra("message_text", message_text);
+                                intent.putExtra("message_date", message_date);
+                                intent.putExtra("message_code", message_code);
+
+                                startActivityForResult(intent, 202);
 
                             });
                         }
