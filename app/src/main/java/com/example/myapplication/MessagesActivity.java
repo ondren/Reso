@@ -27,6 +27,7 @@ public class MessagesActivity extends Activity {
         layout = findViewById(R.id.messages_activity_id);
 
         Button back_btn = findViewById(R.id.back_btn);
+        Button refresh_btn = findViewById(R.id.refresh_btn);
         System.out.println("Messages"+"Activity " + " is working");
 
 
@@ -34,6 +35,14 @@ public class MessagesActivity extends Activity {
         back_btn.setOnClickListener(view -> {
             finish();
         });
+
+        refresh_btn.setOnClickListener(view -> {
+            finish();
+            startActivity(getIntent());
+            redraw();
+
+        });
+
 
         redraw();
 
@@ -74,10 +83,12 @@ public class MessagesActivity extends Activity {
 
     void redraw(){
         ApiAccess.setContext(this);
+        System.out.println("Redrawing...");
         ApiAccess.get("users/messages",
                 response -> {
                     try {
                         JSONArray JSONArray_messages = response.getJSONArray("messages");
+                        System.out.println(JSONArray_messages.length() + " this length");
                         for (int i = 0; i < JSONArray_messages.length(); i++){
                             final Button message_btn = new Button(this);
                             message_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
