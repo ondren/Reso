@@ -4,8 +4,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,9 +52,31 @@ public class MyService extends Service {
                 @Override
                 public void run() {
                     // display toast
-                    Toast.makeText(MyService.this, "Service is running", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MyService.this, "Service is running", Toast.LENGTH_SHORT).show();
                     ApiAccess.setContext(getApplicationContext());
-                    
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("status", "created");
+                    ApiAccess.get("users/messages", params,
+                           response -> {
+                               try {
+                                   JSONArray jsonArray = response.getJSONArray("messages");
+                                   if (jsonArray.length() > 0) {
+                                       Toast.makeText(MyService.this, "You have " +
+                                               jsonArray.length() + " unread messages", Toast.LENGTH_LONG).show();
+                                       int v = 2;
+                                       //вибрацию
+                                       Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                                       long[] vibrationPattern = {0, 1000, 1000, 1500};
+                                       final int indexInPatternRepeat = -1;
+                                       vibrator.vibrate(vibrationPattern, indexInPatternRepeat);
+                                   }
+                               } catch (JSONException e) {
+                                   e.printStackTrace();
+                               }
+
+                           }
+                    );
+
 
 
                 }
