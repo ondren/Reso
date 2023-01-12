@@ -11,20 +11,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/messages_activity_id"
+            android:id="@+id/messages_activity_main_layout"
+            android:textAlignment="center"
             android:orientation="vertical" >
-
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back" />
-
-            <Button
-                android:id="@+id/refresh_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refresh" />
+                android:id="@+id/messages_activity_id"
+                android:textAlignment="center"
+                android:orientation="vertical" >
+
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

@@ -55,18 +55,18 @@ public class QRTablesActivity extends Activity {
                             String result = response.getString("message");
 
                             System.out.println(result);
+                            setResult(RESULT_OK, data);
+
+                            System.out.println("Result ok ");
+                            layout.removeAllViews();
+                            redraw();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     });
 
-            setResult(RESULT_OK, data);
 
-            System.out.println("Result ok ");
-            finish();
-            startActivity(getIntent());
-            redraw();
 
         }
     }

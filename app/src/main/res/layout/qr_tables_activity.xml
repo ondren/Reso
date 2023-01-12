@@ -9,20 +9,27 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/qr_tables_id"
+            android:id="@+id/qr_tables_main_layout"
             android:textAlignment="center"
             android:orientation="vertical" >
-
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/qr_tables_id"
+                android:textAlignment="center"
+                android:orientation="vertical" >
+
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

@@ -27,7 +27,6 @@ public class MessagesActivity extends Activity {
         layout = findViewById(R.id.messages_activity_id);
 
         Button back_btn = findViewById(R.id.back_btn);
-        Button refresh_btn = findViewById(R.id.refresh_btn);
         System.out.println("Messages"+"Activity " + " is working");
 
 
@@ -36,12 +35,6 @@ public class MessagesActivity extends Activity {
             finish();
         });
 
-        refresh_btn.setOnClickListener(view -> {
-            finish();
-            startActivity(getIntent());
-            redraw();
-
-        });
 
 
         redraw();
@@ -65,18 +58,20 @@ public class MessagesActivity extends Activity {
                             String result = response.getString("message");
 
                             System.out.println(result);
+                            setResult(RESULT_OK, data);
+
+                            System.out.println("Result ok ");
+                            layout.removeAllViews();
+                            redraw();
+
+                            System.out.println(result);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     });
 
-            setResult(RESULT_OK, data);
 
-            System.out.println("Result ok ");
-            finish();
-            startActivity(getIntent());
-            redraw();
         }
 
     }

@@ -13,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import api.ApiAccess;
 
 public class OrdersActivity extends Activity {
@@ -39,7 +41,10 @@ public class OrdersActivity extends Activity {
 
         void redraw(){
         ApiAccess.setContext(this);
-        ApiAccess.get("qr/orders", response -> {
+            HashMap<String, String> params = new HashMap<>();
+            params.put("code", code);
+        ApiAccess.get("qr/orders",params,
+                response -> {
             try {
                 JSONArray jsonArray = response.getJSONArray("orders");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -65,7 +70,11 @@ public class OrdersActivity extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        });
+        },
+                error ->{
+                    String message = new String(error.networkResponse.data);
+                    int v = 4;
+                });
     }
 
 
@@ -73,14 +82,10 @@ public class OrdersActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) {return;}
         if (resultCode == RESULT_OK && requestCode == 208){
-
             setResult(RESULT_OK, data);
-
             System.out.println("Result ok ");
-            finish();
-            startActivity(getIntent());
+            layout.removeAllViews();
             redraw();
-
         }
     }
 
