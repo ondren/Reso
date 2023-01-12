@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.Utils.vibrate;
+
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -55,7 +58,9 @@ public class MyService extends Service {
                     //Toast.makeText(MyService.this, "Service is running", Toast.LENGTH_SHORT).show();
                     ApiAccess.setContext(getApplicationContext());
                     HashMap<String, String> params = new HashMap<>();
+                    Context context = getApplicationContext();
                     params.put("status", "created");
+
                     ApiAccess.get("users/messages", params,
                            response -> {
                                try {
@@ -64,11 +69,13 @@ public class MyService extends Service {
                                        Toast.makeText(MyService.this, "You have " +
                                                jsonArray.length() + " unread messages", Toast.LENGTH_LONG).show();
                                        int v = 2;
+
+                                       vibrate(getApplicationContext());
                                        //вибрацию
-                                       Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                                       long[] vibrationPattern = {0, 1000, 1000, 1500};
-                                       final int indexInPatternRepeat = -1;
-                                       vibrator.vibrate(vibrationPattern, indexInPatternRepeat);
+//                                       Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+//                                       long[] vibrationPattern = {0, 1000, 1000, 1500};
+//                                       final int indexInPatternRepeat = -1;
+//                                       vibrator.vibrate(vibrationPattern, indexInPatternRepeat);
                                    }
                                } catch (JSONException e) {
                                    e.printStackTrace();
