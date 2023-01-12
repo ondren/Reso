@@ -44,7 +44,7 @@ public class QRTablesActivity extends Activity {
         String table_code = data.getStringExtra("table");
         if (data == null) {return;}
         if (resultCode == RESULT_OK && requestCode == 209){
-            System.out.println("code in QRTablesActivity = " + code +  " table_no = " + table_code);
+            System.out.println("code in QRTablesActivity = " + code +  " table_code = " + table_code);
             ApiAccess.setContext(this);
             HashMap<String, String> params = new HashMap<>();
             params.put("code", code);
