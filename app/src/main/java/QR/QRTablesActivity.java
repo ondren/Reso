@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package QR;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import com.example.myapplication.R;
+import com.example.myapplication.YesNoActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

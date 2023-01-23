@@ -26,7 +26,7 @@
             android:label="Login">
         </activity>
         <activity
-            android:name=".ShowQrActivity"
+            android:name="QR.ShowQrActivity"
             android:exported="false"
             android:label="QR">
         </activity>
@@ -46,7 +46,7 @@
             android:label="Sure?">
         </activity>
         <activity
-            android:name=".QRTablesActivity"
+            android:name="QR.QRTablesActivity"
             android:exported="false"
             android:label="Tables">
         </activity>
@@ -91,7 +91,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="Service.MyFirebaseMessagingService"
             android:stopWithTask="false"
             android:exported="true">
             <intent-filter>
@@ -99,7 +99,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".MyService"
+            android:name="Service.MyService"
             android:enabled="true"
             android:exported="true">
 

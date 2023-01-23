@@ -1,6 +1,5 @@
-package com.example.myapplication;
+package Service;
 
-import static com.example.myapplication.Utils.vibrate;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,19 +12,21 @@ import android.os.Build;
 import android.os.Looper;
 import android.os.Handler;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
+import com.example.myapplication.MessagesActivity;
+import com.example.myapplication.R;
+
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 
 import java.util.HashMap;
 
+import Utils.VibrateUtil;
 import api.ApiAccess;
 
 
@@ -87,7 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setSmallIcon(R.drawable.ic_stat_notification)
                         .setContentTitle(title)
                         .setContentText(messageBody)
-                        .setVibrate(Utils.DEFAULT_VIBRATION_PATTERN)
+                        .setVibrate(VibrateUtil.DEFAULT_VIBRATION_PATTERN)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);

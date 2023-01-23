@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package Utils;
 
 
 import static android.content.Context.VIBRATOR_SERVICE;
@@ -10,7 +10,7 @@ import android.os.Vibrator;
 
 import android.os.Vibrator;
 
-public  class Utils {
+public  class VibrateUtil {
     public static final long[] DEFAULT_VIBRATION_PATTERN = {0, 1000, 300, 1000, 300, 2000, 300, 1000, 500, 1000, 500, 1000};
 
     public static void vibrate(Context context){

@@ -12,6 +12,8 @@ import org.json.JSONException;
 
 import java.util.HashMap;
 
+import QR.QRTablesActivity;
+import QR.ShowQrActivity;
 import api.ApiAccess;
 
 public class QRSettingsActivity extends Activity {

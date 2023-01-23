@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package QR;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import com.example.myapplication.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
