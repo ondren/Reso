@@ -39,6 +39,7 @@ public class QrActivity extends Activity {
                     final Button button = new Button(this);
                     button.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                     button.setId(i);
+                    button.setHeight(80);
                     button.setText("QR " + i);
 
                     button.setOnClickListener(view -> {

@@ -1,6 +1,6 @@
 package Service;
 
-import static Utils.Utils.vibrate;
+//import static Utils.Utils.vibrate;
 
 import android.app.Service;
 import android.content.Context;
@@ -69,7 +69,7 @@ public class MyService extends Service {
                                                jsonArray.length() + " unread messages", Toast.LENGTH_LONG).show();
                                        int v = 2;
 
-                                       vibrate(getApplicationContext());
+                                       //vibrate(getApplicationContext());
                                        //вибрацию
 //                                       Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 //                                       long[] vibrationPattern = {0, 1000, 1000, 1500};

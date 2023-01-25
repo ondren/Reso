@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -27,12 +29,12 @@ public class QRSettingsActivity extends Activity {
         setContentView(R.layout.qr_settings_activity);
         Button back_btn = findViewById(R.id.back_btn);
         Button orders_btn = findViewById(R.id.orders_btn);
-        System.out.println("QRSettings"+"Activity " + " is working");
+        System.out.println("QRSettings" + "Activity " + " is working");
         code = getIntent().getStringExtra("code");
 
         orders_btn.setOnClickListener(view -> {
             Intent intent = new Intent(QRSettingsActivity.this, OrdersActivity.class);
-            intent.putExtra("code",code);
+            intent.putExtra("code", code);
             startActivity(intent);
         });
 
@@ -46,26 +48,25 @@ public class QRSettingsActivity extends Activity {
 
 
 
-
         Button btn_intent_qr_show = findViewById(R.id.btn_intent_qr_show);
         Button btn_intent_tables = findViewById(R.id.btn_intent_tables);
 
         TextView staff_id = findViewById(R.id.staff_id);
-        TextView tables_id = findViewById(R.id.tables_id);
+
 
         btn_intent_tables.setOnClickListener(view -> {
             Intent intent = new Intent(QRSettingsActivity.this, QRTablesActivity.class);
             intent.putExtra("code", code);
             startActivityForResult(intent, 201);
         });
-        code =  getIntent().getStringExtra("code");
+        code = getIntent().getStringExtra("code");
         System.out.println("Code in QRSettingsActivity: " + code);
         btn_intent_qr_show.setOnClickListener(view -> {
 
-            System.out.println("Link in showQRActivity "+link);
+            System.out.println("Link in showQRActivity " + link);
             Intent intent = new Intent(QRSettingsActivity.this, ShowQrActivity.class);
-            System.out.println("intent worked link is "+ link);
-            intent.putExtra("link",link);
+            System.out.println("intent worked link is " + link);
+            intent.putExtra("link", link);
             startActivity(intent);
         });
 
@@ -73,14 +74,15 @@ public class QRSettingsActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null) {return;}
-        if(resultCode == RESULT_OK && requestCode == 201){
+        if (data == null) {
+            return;
+        }
+        if (resultCode == RESULT_OK && requestCode == 201) {
             redraw();
         }
     }
 
-    void redraw(String code)
-    {
+    void redraw(String code) {
         ApiAccess.setContext(this);
         HashMap<String, String> params = new HashMap<>();
         params.put("code", code);
@@ -96,8 +98,9 @@ public class QRSettingsActivity extends Activity {
                 });
 
     }
-    void redraw()
-    {
+
+    void redraw() {
         redraw(code);
     }
 }
+

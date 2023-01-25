@@ -88,6 +88,7 @@ public class MessagesActivity extends Activity {
                             final Button message_btn = new Button(this);
                             message_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                             message_btn.setId(i);
+                            message_btn.setHeight(80);
                             JSONObject message = JSONArray_messages.getJSONObject(i);
                             String message_text = message.getString("message");
                             String message_code = message.getString("code");

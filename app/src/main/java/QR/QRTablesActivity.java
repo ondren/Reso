@@ -84,6 +84,7 @@ public class QRTablesActivity extends Activity {
                             final Button table_btn = new Button(this);
                             table_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                             table_btn.setId(i);
+                            table_btn.setHeight(80);
                             JSONObject table = JSONArray_tables.getJSONObject(i);
                             String tableName = "Место " + table.getString("name");
                             String table_code = table.getString("name");

@@ -21,7 +21,7 @@
             <Button
                 android:id="@+id/take_order_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:text="Take order" />
         </LinearLayout>
     </ScrollView>

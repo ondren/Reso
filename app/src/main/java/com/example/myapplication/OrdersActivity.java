@@ -54,6 +54,7 @@ public class OrdersActivity extends Activity {
                     final Button order_id_btn = new Button(this);
                     order_id_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                     order_id_btn.setId(i);
+                    order_id_btn.setHeight(80);
                     order_id_btn.setText("order id: " + order_id);
                     order_id_btn.setGravity(Gravity.CENTER);
                     layout.addView(order_id_btn);

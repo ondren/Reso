@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/yes_btn"
         android:layout_width="201dp"
-        android:layout_height="53dp"
+        android:layout_height="80dp"
         android:text="Yes"
         app:layout_constraintBottom_toTopOf="@+id/no_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
     <Button
         android:id="@+id/no_btn"
         android:layout_width="203dp"
-        android:layout_height="54dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="36dp"
         android:text="No"
         app:layout_constraintBottom_toBottomOf="parent"
