@@ -1,10 +1,12 @@
-package com.example.myapplication;
+package QR;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.example.myapplication.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

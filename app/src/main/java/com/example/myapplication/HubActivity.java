@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import Messages.MessagesActivity;
+import QR.QrActivity;
 import Service.MyService;
 
 public class HubActivity extends Activity {
@@ -51,10 +53,8 @@ public class HubActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hub_activity);
         RequestQueue queue = Volley.newRequestQueue(this);
-        startService(new Intent(this, MyService.class)); //start service which is MyService.java
+        startService(new Intent(this, MyService.class));
 
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        this.setContentView(binding.getRoot());
         Button exit_but = findViewById(R.id.exit_btn);
         Button qr_but = findViewById(R.id.qr_btn);
         Button chat_but = findViewById(R.id.chat_btn);

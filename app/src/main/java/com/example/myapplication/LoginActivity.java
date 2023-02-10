@@ -98,8 +98,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_activity);
         System.out.println("Login "+"Activity " + " is working");
         RequestQueue queue = Volley.newRequestQueue(this);
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        this.setContentView(binding.getRoot());
+
         Button but = findViewById(R.id.go_button);
         but.setOnClickListener(onClick);
         login_et = findViewById(R.id.login_et);

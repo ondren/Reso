@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.example.myapplication.MessagesActivity;
+import Messages.MessagesActivity;
 import com.example.myapplication.R;
 
 import com.google.firebase.messaging.FirebaseMessagingService;

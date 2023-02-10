@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package Messages;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import com.example.myapplication.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

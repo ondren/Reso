@@ -15,6 +15,8 @@ import java.util.HashMap;
 
 import api.ApiAccess;
 
+
+
 public class YesNoActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

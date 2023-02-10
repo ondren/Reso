@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package QR;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,14 +8,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import org.json.JSONArray;
+import Orders.OrdersActivity;
+import com.example.myapplication.R;
+
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import QR.QRTablesActivity;
-import QR.ShowQrActivity;
 import api.ApiAccess;
 
 public class QRSettingsActivity extends Activity {
@@ -54,6 +53,7 @@ public class QRSettingsActivity extends Activity {
         TextView staff_id = findViewById(R.id.staff_id);
 
 
+
         btn_intent_tables.setOnClickListener(view -> {
             Intent intent = new Intent(QRSettingsActivity.this, QRTablesActivity.class);
             intent.putExtra("code", code);
@@ -70,6 +70,14 @@ public class QRSettingsActivity extends Activity {
             startActivity(intent);
         });
 
+    }
+
+    void set_staff_text(){
+        ApiAccess.setContext(this);
+        ApiAccess.get("qr",
+                response -> {
+
+                });
     }
 
     @Override

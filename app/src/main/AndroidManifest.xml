@@ -31,12 +31,12 @@
             android:label="QR">
         </activity>
         <activity
-            android:name=".OrderInfoActivity"
+            android:name="Orders.OrderInfoActivity"
             android:exported="false"
             android:label="Order">
         </activity>
         <activity
-            android:name=".OrdersActivity"
+            android:name="Orders.OrdersActivity"
             android:exported="false"
             android:label="Orders">
         </activity>
@@ -52,19 +52,19 @@
         </activity>
 
         <activity
-            android:name=".MessagesActivity"
+            android:name="Messages.MessagesActivity"
             android:exported="true"
             android:label="Messages">
         </activity>
 
         <activity
-            android:name=".MessageConfirmActivity"
+            android:name="Messages.MessageConfirmActivity"
             android:exported="true"
             android:label="Message Confirm">
         </activity>
 
         <activity
-            android:name=".QRSettingsActivity"
+            android:name="QR.QRSettingsActivity"
             android:exported="false"
             android:label="QR Settings">
         </activity>
@@ -74,7 +74,7 @@
             android:label="Hub">
         </activity>
         <activity
-            android:name=".QrActivity"
+            android:name="QR.QrActivity"
             android:exported="false"
             android:label="QR">
         </activity>
