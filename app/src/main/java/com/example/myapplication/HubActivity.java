@@ -10,63 +10,53 @@ import android.widget.Button;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.myapplication.databinding.HubActivityBinding;
 
 import Messages.MessagesActivity;
 import QR.QrActivity;
+import Reservations.ReservationsActivity;
 import Service.MyService;
 
 public class HubActivity extends Activity {
     SharedPreferences sp;
-
-    public View.OnClickListener onClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if(view.getId() == R.id.exit_btn){
-                SharedPreferences.Editor editor = sp.edit();
-                System.out.println("Hub"+"Activity " + " is working");
-                editor.remove("token").commit();
-                editor.remove("firebase_token").commit();
-                editor.remove("phone_number").commit();
-
-
-                Intent intent = new Intent(HubActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-            if(view.getId() == R.id.qr_btn){
-                Intent intent = new Intent(HubActivity.this, QrActivity.class);
-                startActivity(intent);
-            }
-            if (view.getId() == R.id.chat_btn){
-                Intent intent = new Intent(HubActivity.this, MessagesActivity.class);
-                startActivity(intent);
-            }
-        }
-
-
-                };
-
+    HubActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hub_activity);
+        binding = HubActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         RequestQueue queue = Volley.newRequestQueue(this);
         startService(new Intent(this, MyService.class));
 
-        Button exit_but = findViewById(R.id.exit_btn);
-        Button qr_but = findViewById(R.id.qr_btn);
-        Button chat_but = findViewById(R.id.chat_btn);
-        Button tables_but = findViewById(R.id.tables_btn);
         sp = getApplicationContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        exit_but.setOnClickListener(onClick);
-        qr_but.setOnClickListener(onClick);
-        chat_but.setOnClickListener(onClick);
-        tables_but.setOnClickListener(onClick);
 
+        initBtns();
+    }
 
+    void initBtns(){
+        binding.chatBtn.setOnClickListener((l)->{
+            Intent intent = new Intent(HubActivity.this, MessagesActivity.class);
+            startActivity(intent);
+        });
+        binding.qrBtn.setOnClickListener((l)->{
+            Intent intent = new Intent(HubActivity.this, QrActivity.class);
+            startActivity(intent);
+        });
+        binding.exitBtn.setOnClickListener((l)->{
+            SharedPreferences.Editor editor = sp.edit();
+            System.out.println("Hub"+"Activity " + " is working");
+            editor.remove("token").apply();
+            editor.remove("firebase_token").apply();
+            editor.remove("phone_number").apply();
+            editor.remove("place").apply();
+            editor.commit();
 
+            Intent intent = new Intent(HubActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
 }

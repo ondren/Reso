@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -45,7 +46,7 @@ public class OrdersActivity extends Activity {
         ApiAccess.setContext(this);
             HashMap<String, String> params = new HashMap<>();
             params.put("code", code);
-        ApiAccess.get("qr/orders",params,
+        ApiAccess.get("codes/" + ApiAccess.getPlace() + "/orders",params,
                 response -> {
             try {
                 JSONArray jsonArray = response.getJSONArray("orders");
@@ -56,8 +57,12 @@ public class OrdersActivity extends Activity {
                     final Button order_id_btn = new Button(this);
                     order_id_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
                     order_id_btn.setId(i);
-                    order_id_btn.setHeight(80);
-                    order_id_btn.setText("order id: " + order_id);
+                    order_id_btn.setHeight(60);
+                    order_id_btn.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    ));
+                    order_id_btn.setText("Заказ: " + order_id);
                     order_id_btn.setGravity(Gravity.CENTER);
                     layout.addView(order_id_btn);
                     order_id_btn.setOnClickListener(view -> {

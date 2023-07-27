@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.example.myapplication.R;
 import com.example.myapplication.YesNoActivity;
+import com.example.myapplication.databinding.OrderInfoActivityBinding;
 
 import org.json.JSONException;
 
@@ -19,27 +20,25 @@ import api.ApiAccess;
 public class OrderInfoActivity extends Activity {
     String code;
     String order_id;
+    OrderInfoActivityBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_info_activity);
-        Button back_btn = findViewById(R.id.back_btn);
-        System.out.println("OrderInfo"+"Activity " + " is working");
+        binding = OrderInfoActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         code = getIntent().getStringExtra("code");
         order_id = getIntent().getStringExtra("order_id");
-        System.out.println("OrderInfoActivity got extras: "+ "code = " + code + " order_id = " + order_id);
-        back_btn.setOnClickListener(view -> {
+
+        binding.backBtn.setOnClickListener(view -> {
             finish();
         });
-        Button take_order_btn = findViewById(R.id.take_order_id);
-        take_order_btn.setOnClickListener(view -> {
+        binding.takeOrderId.setOnClickListener(view -> {
             Intent intent = new Intent(OrderInfoActivity.this, YesNoActivity.class);
+            intent.putExtra("text", "Привязать заказ " + order_id + " к коду " + code + "?");
             startActivityForResult(intent, 209);
         });
-
-
-
     }
 
     @Override
@@ -50,19 +49,19 @@ public class OrderInfoActivity extends Activity {
             HashMap<String, String> params = new HashMap<>();
             params.put("code", code);
             params.put("order", order_id);
-            ApiAccess.get("qr/orders/set", params,
-                    response -> {
-
-                        try {
-                            String result = response.getString("message");
-
-
-                            System.out.println(result);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    });
+            ApiAccess.get("codes/" + ApiAccess.getPlace() + "/orders/bind/" + code, params,
+                response -> {
+                    try {
+                        String result = response.getString("message");
+                        System.out.println(result);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error ->{
+                    System.out.println(error.getMessage());
+                }
+            );
             setResult(RESULT_OK, data);
 
             System.out.println("Result ok ");

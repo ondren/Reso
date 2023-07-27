@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,38 +12,146 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="60dp"
             android:orientation="vertical" >
 
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Back" />
+                android:layout_height="60dp"
+                android:text="Назад" />
 
             <TextView
-                android:id="@+id/staff_id"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:textAlignment="center" />
+                android:layout_height="wrap_content"
+                android:text="Информация о коде"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:paddingTop="10dp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_intent_tables"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Tables" />
+                android:layout_height="wrap_content"
+                android:id="@+id/info_list"
+                android:paddingBottom="30dp"
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_intent_qr_show"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Show QR" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/orders_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Orders" />
+                android:layout_height="60dp"
+                android:text="Привязать заказ" />
 
+            <Button
+                android:id="@+id/btn_set_me_waiter"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Назначить меня официантом" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/set_me_waiter_confirm_block"
+                android:visibility="gone"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/set_me_waiter_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Назначить себя официантом?"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_set_me_waiter_refuse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Нет"
+                    android:textColor="#F44336"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_set_me_waiter_confirm"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/set_me_waiter_text" />
+
+                <Button
+                    android:id="@+id/btn_set_me_waiter_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Да"
+                    android:textColor="#4CAF50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/set_me_waiter_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_intent_tables"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:text="Столы" />-->
+
+
+            <Button
+                android:id="@+id/btn_intent_qr_show"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Показать QR" />
+
+
+            <Button
+                android:id="@+id/btn_close_code"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:text="Закрыть код"
+                android:textColor="#F44336"
+                android:visibility="visible" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/close_code_confirm_block"
+                android:visibility="gone"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/close_code_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Закрыть код?"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/close_code_refuse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Нет"
+                    android:textColor="#F44336"
+                    app:layout_constraintEnd_toStartOf="@+id/close_code_confirm"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/close_code_text" />
+
+                <Button
+                    android:id="@+id/close_code_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Да"
+                    android:textColor="#4CAF50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/close_code_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

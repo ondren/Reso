@@ -22,26 +22,26 @@
             <Button
                 android:id="@+id/tables_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Tables" />
+                android:layout_height="50dp"
+                android:text="Столы" />
 
             <Button
                 android:id="@+id/chat_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Chat" />
+                android:layout_height="50dp"
+                android:text="Сообщения" />
 
             <Button
                 android:id="@+id/qr_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="QR" />
+                android:layout_height="50dp"
+                android:text="QR-коды" />
 
             <Button
                 android:id="@+id/exit_btn"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="Exit" />
+                android:layout_height="50dp"
+                android:text="Выход" />
         </LinearLayout>
     </ScrollView>
 

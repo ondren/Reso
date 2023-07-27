@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -13,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myapplication.BuildConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,9 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApiAccess {
-    private static String host = "restaurantize.ru";
+    private static String host = "lite-menu.com"; // BuildConfig.HOST;
     private static String api = "/api";
-    private static String protocol = "https";
+    private static String protocol = "https"; // BuildConfig.HOST_PROTOCOL;
     private static int port = 0;
     private static Context context;
 

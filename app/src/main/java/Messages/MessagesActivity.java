@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.MessagesActivityBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,24 +22,15 @@ import java.util.HashMap;
 import api.ApiAccess;
 
 public class MessagesActivity extends Activity {
-    LinearLayout layout;
+    MessagesActivityBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.messages_activity);
-        layout = findViewById(R.id.messages_activity_id);
+        binding = MessagesActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        Button back_btn = findViewById(R.id.back_btn);
-        System.out.println("Messages"+"Activity " + " is working");
-
-
-
-        back_btn.setOnClickListener(view -> {
-            finish();
-        });
-
-
+        binding.backBtn.setOnClickListener((l)->finish());
 
         redraw();
 
@@ -63,7 +56,7 @@ public class MessagesActivity extends Activity {
                             setResult(RESULT_OK, data);
 
                             System.out.println("Result ok ");
-                            layout.removeAllViews();
+                            binding.messagesActivityId.removeAllViews();
                             redraw();
 
                             System.out.println(result);
@@ -82,40 +75,45 @@ public class MessagesActivity extends Activity {
         ApiAccess.setContext(this);
         System.out.println("Redrawing...");
         ApiAccess.get("users/messages",
-                response -> {
-                    try {
-                        JSONArray JSONArray_messages = response.getJSONArray("messages");
-                        System.out.println(JSONArray_messages.length() + " this length");
-                        for (int i = 0; i < JSONArray_messages.length(); i++){
-                            final Button message_btn = new Button(this);
-                            message_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
-                            message_btn.setId(i);
-                            message_btn.setHeight(80);
-                            JSONObject message = JSONArray_messages.getJSONObject(i);
-                            String message_text = message.getString("message");
-                            String message_code = message.getString("code");
-                            String message_date = message.getString("created_at");
-                            System.out.println("message code is " + message_code);
-                            System.out.println("message text is  " + message_text);
-                            System.out.println("message date is  " + message_date);
+            response -> {
+                try {
+                    JSONArray JSONArray_messages = response.getJSONArray("messages");
+                    System.out.println(JSONArray_messages.length() + " this length");
+                    for (int i = 0; i < JSONArray_messages.length(); i++){
+                        final Button message_btn = new Button(this);
+                        message_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
+                        message_btn.setId(i);
+                        message_btn.setMinHeight(60);
 
-                            message_btn.setText(message_text);
-                            message_btn.setGravity(Gravity.CENTER);
-                            layout.addView(message_btn);
-                            message_btn.setOnClickListener(view -> {
-                                Intent intent = new Intent(MessagesActivity.this, MessageConfirmActivity.class);
-                                intent.putExtra("message_text", message_text);
-                                intent.putExtra("message_date", message_date);
-                                intent.putExtra("message_code", message_code);
+                        message_btn.setLayoutParams(new ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        ));
+                        JSONObject message = JSONArray_messages.getJSONObject(i);
+                        String message_text = message.getString("message");
+                        String message_title = message.getString("title");
+                        String message_code = message.getString("code");
+                        String message_date = message.getString("created_at");
 
-                                startActivityForResult(intent, 202);
+                        String txt = message_title.equals("null") ? message_text : message_title;
+                        message_btn.setText(message_text);
+                        message_btn.setGravity(Gravity.CENTER);
+                        message_btn.setOnClickListener(view -> {
+                            Intent intent = new Intent(MessagesActivity.this, MessageConfirmActivity.class);
+                            intent.putExtra("text", message_text);
+                            intent.putExtra("title", message_title.equals("null") ? "":message_title);
+                            intent.putExtra("date", message_date);
+                            intent.putExtra("code", message_code);
 
-                            });
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                            startActivityForResult(intent, 202);
+
+                        });
+                        binding.messagesActivityId.addView(message_btn);
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            });
 
     }
 }

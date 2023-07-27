@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
+import com.example.myapplication.databinding.YesNoActivityBinding;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,23 +20,23 @@ import api.ApiAccess;
 
 
 public class YesNoActivity extends Activity {
+
+    YesNoActivityBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = YesNoActivityBinding.inflate(getLayoutInflater());
         System.out.println("YesNoActivity" + " is working");
 
-        setContentView(R.layout.yes_no_activity);
+        setContentView(binding.getRoot());
 
-
-
-        Button yes_btn = findViewById(R.id.yes_btn);
-        yes_btn.setOnClickListener(v -> {
+        binding.textView.setText(getIntent().getStringExtra("text"));
+        binding.yesBtn.setOnClickListener(v -> {
             Intent intent = getIntent();
             setResult(RESULT_OK, intent);
             finish();
         });
-        Button no_btn = findViewById(R.id.no_btn);
-        no_btn.setOnClickListener(v -> {
+        binding.noBtn.setOnClickListener(v -> {
             Intent intent = getIntent();
             setResult(RESULT_CANCELED, intent);
             finish();

@@ -9,42 +9,36 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.MessageConfirmActivityBinding;
 
 public class MessageConfirmActivity extends Activity {
+
+    MessageConfirmActivityBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        System.out.println("MessageConfirmActivity is working");
-        setContentView(R.layout.message_confirm_activity);
+        binding = MessageConfirmActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        String message_title = getIntent().getStringExtra("title");
+        String message_text = getIntent().getStringExtra("text");
+        String message_date = getIntent().getStringExtra("date");
 
-        TextView message_text_textview = findViewById(R.id.message_text_id);
-        TextView message_date_textview = findViewById(R.id.message_date_id);
+        binding.messageDate.setText(message_date);
+        binding.messageText.setText(message_text);
+        binding.messageTitle.setText(message_title);
 
-        String message_text = getIntent().getStringExtra("message_text");
-        String message_date = getIntent().getStringExtra("message_date");
-
-        System.out.println("message text is " + message_text);
-        System.out.println("message date is " + message_date);
-
-
-        message_date_textview.setText("Created at: " + message_date);
-        message_text_textview.setText("Text is: " + message_text);
-
-        Button back_btn = findViewById(R.id.back_btn);
-        back_btn.setOnClickListener(view -> {
+        binding.backBtn.setOnClickListener((l)->{
             Intent intent = getIntent();
             setResult(RESULT_CANCELED, intent);
             finish();
         });
 
-        Button confirm_btn = findViewById(R.id.confirm_btn);
-        confirm_btn.setOnClickListener(view -> {
+        binding.confirmBtn.setOnClickListener((l)->{
             Intent intent = getIntent();
             setResult(RESULT_OK, intent);
             finish();
-
         });
     }
 }

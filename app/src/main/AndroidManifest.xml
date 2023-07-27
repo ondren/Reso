@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
@@ -13,8 +12,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.DeviceDefault">
-
+        android:theme="@android:style/Theme.DeviceDefault"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="Orders.QrCreateActivity"
+            android:exported="false"
+            android:label="Создать QR-код"
+            />
+        <activity
+            android:name="Reservations.ReservationsActivity"
+            android:exported="false"
+            android:label="Reservations" />
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
@@ -23,63 +31,47 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:label="Login">
-        </activity>
+            android:label="Login" />
         <activity
             android:name="QR.ShowQrActivity"
             android:exported="false"
-            android:label="QR">
-        </activity>
+            android:label="QR" />
         <activity
             android:name="Orders.OrderInfoActivity"
             android:exported="false"
-            android:label="Order">
-        </activity>
+            android:label="Order" />
         <activity
             android:name="Orders.OrdersActivity"
             android:exported="false"
-            android:label="Orders">
-        </activity>
+            android:label="Orders" />
         <activity
             android:name=".YesNoActivity"
             android:exported="false"
-            android:label="Sure?">
-        </activity>
+            android:label="Sure?" />
         <activity
             android:name="QR.QRTablesActivity"
             android:exported="false"
-            android:label="Tables">
-        </activity>
-
+            android:label="Tables" />
         <activity
             android:name="Messages.MessagesActivity"
             android:exported="true"
-            android:label="Messages">
-        </activity>
-
+            android:label="Messages" />
         <activity
             android:name="Messages.MessageConfirmActivity"
             android:exported="true"
-            android:label="Message Confirm">
-        </activity>
-
+            android:label="Message Confirm" />
         <activity
             android:name="QR.QRSettingsActivity"
             android:exported="false"
-            android:label="QR Settings">
-        </activity>
+            android:label="QR Settings" />
         <activity
             android:name=".HubActivity"
             android:exported="false"
-            android:label="Hub">
-        </activity>
+            android:label="Hub" />
         <activity
             android:name="QR.QrActivity"
             android:exported="false"
-            android:label="QR">
-        </activity>
-
-
+            android:label="QR" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -90,10 +82,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name="Service.MyFirebaseMessagingService"
-            android:stopWithTask="false"
-            android:exported="true">
+            android:exported="true"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -101,10 +94,7 @@
         <service
             android:name="Service.MyService"
             android:enabled="true"
-            android:exported="true">
-
-        </service>
-
+            android:exported="true" />
     </application>
 
 </manifest>
