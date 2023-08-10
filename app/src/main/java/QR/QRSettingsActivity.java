@@ -167,10 +167,17 @@ public class QRSettingsActivity extends Activity {
         binding.infoList.removeAllViews();
         try {
             String c = code.toString();
-            String closed_at = code.getString("closed_at");
+            String closed_at = code.optString("closed_at", "");
+            String comment = code.optString("comment","");
             boolean code_closed = !(closed_at == null || closed_at.equals("") || closed_at.equals("null"));
 
             TextView t = new TextView(this);
+            t.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            t.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            t.setText("Комментарий: " + comment);
+            binding.infoList.addView(t);
+
+            t = new TextView(this);
             t.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             t.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             t.setText("Статус: " + (code_closed ? "закрыт" : "активен"));

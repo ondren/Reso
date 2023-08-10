@@ -18,7 +18,7 @@
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:text="Назад" />
 
             <TextView
@@ -42,13 +42,13 @@
             <Button
                 android:id="@+id/orders_btn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:text="Привязать заказ" />
 
             <Button
                 android:id="@+id/btn_set_me_waiter"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:text="Назначить меня официантом" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,32 +60,33 @@
 
                 <TextView
                     android:id="@+id/set_me_waiter_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Назначить себя официантом?"
                     android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_set_me_waiter_refuse"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:text="Нет"
                     android:textColor="#F44336"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_set_me_waiter_confirm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/set_me_waiter_text" />
 
                 <Button
                     android:id="@+id/btn_set_me_waiter_confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
                     android:layout_marginEnd="12dp"
                     android:text="Да"
                     android:textColor="#4CAF50"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_set_me_waiter_refuse"
                     app:layout_constraintTop_toBottomOf="@+id/set_me_waiter_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -100,14 +101,14 @@
             <Button
                 android:id="@+id/btn_intent_qr_show"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:text="Показать QR" />
 
 
             <Button
                 android:id="@+id/btn_close_code"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="30dp"
                 android:text="Закрыть код"
                 android:textColor="#F44336"

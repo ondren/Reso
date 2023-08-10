@@ -19,28 +19,53 @@
             android:padding="@dimen/inner_frame_layout_padding"
             app:layout_boxedEdges="all">
 
-            <Button
-                android:id="@+id/tables_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Столы" />
 
             <Button
                 android:id="@+id/chat_btn"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:text="Сообщения" />
 
-            <Button
-                android:id="@+id/qr_btn"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="QR-коды" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
+                <Button
+                    android:id="@+id/qr_btn"
+                    android:layout_height="80dp"
+                    android:layout_width="0dp"
+                    android:text="QR-коды"
+                    app:layout_constraintEnd_toStartOf="@+id/qr_new_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/qr_new_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:paddingStart="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingRight="8dp"
+                    app:layout_constraintWidth_percent="0.45"
+                    android:text="Новый код"
+                    android:textColor="#4CAF50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <Button
+                android:id="@+id/tables_btn"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Столы" />
             <Button
                 android:id="@+id/exit_btn"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:text="Выход" />
         </LinearLayout>
     </ScrollView>

@@ -20,6 +20,7 @@ import java.util.HashMap;
 import Orders.OrderInfoActivity;
 import Orders.QrCreateActivity;
 import api.ApiAccess;
+import api.ApiAccessQueryParams;
 
 public class QrActivity extends Activity {
     QrActivityBinding binding;
@@ -36,7 +37,7 @@ public class QrActivity extends Activity {
         });
         binding.newQr.setOnClickListener( view -> {
             Intent intent = new Intent(QrActivity.this, QrCreateActivity.class);
-            startActivityForResult(intent, 300);
+            startActivity(intent);
         });
 
         redraw();
@@ -46,71 +47,56 @@ public class QrActivity extends Activity {
         if(data == null)
             return;
         if(resultCode == RESULT_OK && requestCode == 300){
-            String comment = data.getStringExtra("comment");
-            ApiAccess.setContext(this);
-            try {
-                JSONObject code_data = new JSONObject();
-                code_data.put("comment", comment);
-                ApiAccess.post("codes/" + ApiAccess.getPlace(), code_data,
-                    response -> {
-                        redraw();
-                    },
-                    error ->{
-                        System.out.println(error.getMessage());
-                    }
-                );
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+            redraw();
         }
     }
 
     void redraw(){
+        ApiAccessQueryParams qp = new ApiAccessQueryParams("active", "1");
         ApiAccess.get("codes/" + ApiAccess.getPlace(),
-                response -> {
-                    try {
-                        binding.qrList.removeAllViews();
-                        JSONObject codes_data = response.getJSONObject("codes");
-                        JSONArray JSONArray_codes = codes_data.getJSONArray("data");
-                        for (int i = 0; i < JSONArray_codes.length(); i++) {
-                            JSONObject j = JSONArray_codes.getJSONObject(i);
-                            String code = j.getString("code");
-                            String comment = j.getString("comment");
-                            System.out.println(code.toString());
+            response -> {
+                try {
+                    binding.qrList.removeAllViews();
+                    JSONObject codes_data = response.getJSONObject("codes");
+                    JSONArray JSONArray_codes = codes_data.getJSONArray("data");
+                    for (int i = 0; i < JSONArray_codes.length(); i++) {
+                        JSONObject j = JSONArray_codes.getJSONObject(i);
+                        String code = j.getString("code");
+                        String comment = j.getString("comment");
+                        System.out.println(code.toString());
 
-                            final Button button = new Button(this);
-                            button.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
-                            button.setId(i);
-                            button.setMinHeight(60);
+                        final Button button = new Button(this);
+                        button.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
+                        button.setId(i);
+                        button.setMinHeight(60);
 
-                            button.setLayoutParams(new ViewGroup.LayoutParams(
-                                    ViewGroup.LayoutParams.MATCH_PARENT,
-                                    ViewGroup.LayoutParams.WRAP_CONTENT
-                            ));
-                            String btn_name = "QR " + i + ": " + comment;
-                            button.setText(btn_name);
+                        button.setLayoutParams(new ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        ));
+                        String btn_name = "QR " + i + ": " + comment;
+                        button.setText(btn_name);
 
-                            button.setOnClickListener(view -> {
-                                Intent intent = new Intent(QrActivity.this, QRSettingsActivity.class);
-                                intent.putExtra("code", code);
-                                System.out.println(code);
-                                startActivity(intent);
+                        button.setOnClickListener(view -> {
+                            Intent intent = new Intent(QrActivity.this, QRSettingsActivity.class);
+                            intent.putExtra("code", code);
+                            System.out.println(code);
+                            startActivity(intent);
 
-                            });
+                        });
 
-                            binding.qrList.addView(button);
+                        binding.qrList.addView(button);
 
-                        }
-
-                    }catch (JSONException e){
-                        e.printStackTrace();
                     }
 
-                },
-                error -> {
-
+                }catch (JSONException e){
+                    e.printStackTrace();
                 }
+
+            },
+            error -> {
+
+            }
         );
     }
 }

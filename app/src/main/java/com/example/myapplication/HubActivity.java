@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.myapplication.databinding.HubActivityBinding;
 
 import Messages.MessagesActivity;
+import Orders.QrCreateActivity;
 import QR.QrActivity;
 import Reservations.ReservationsActivity;
 import Service.MyService;
@@ -35,6 +36,15 @@ public class HubActivity extends Activity {
         initBtns();
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 300) {
+            Intent intent = new Intent(HubActivity.this, QrActivity.class);
+            startActivity(intent);
+        }
+    }
+
     void initBtns(){
         binding.chatBtn.setOnClickListener((l)->{
             Intent intent = new Intent(HubActivity.this, MessagesActivity.class);
@@ -43,6 +53,10 @@ public class HubActivity extends Activity {
         binding.qrBtn.setOnClickListener((l)->{
             Intent intent = new Intent(HubActivity.this, QrActivity.class);
             startActivity(intent);
+        });
+        binding.qrNewBtn.setOnClickListener((l)->{
+            Intent intent = new Intent(HubActivity.this, QrCreateActivity.class);
+            startActivityForResult(intent, 300);
         });
         binding.exitBtn.setOnClickListener((l)->{
             SharedPreferences.Editor editor = sp.edit();
