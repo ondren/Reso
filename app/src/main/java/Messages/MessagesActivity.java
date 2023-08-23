@@ -38,35 +38,8 @@ public class MessagesActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String message_code = data.getStringExtra("message_code");
-        if (data == null) {return;}
-        if (resultCode == RESULT_OK && requestCode == 202){
-            System.out.println("message_code in MessagesActivity is: " + message_code);
-
-            ApiAccess.setContext(this);
-            HashMap<String, String> params = new HashMap<>();
-            params.put("code", message_code);
-            ApiAccess.get("users/messages/confirm", params,
-                    response -> {
-
-                        try {
-                            String result = response.getString("message");
-
-                            System.out.println(result);
-                            setResult(RESULT_OK, data);
-
-                            System.out.println("Result ok ");
-                            binding.messagesActivityId.removeAllViews();
-                            redraw();
-
-                            System.out.println(result);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    });
-
-
+        if (requestCode == 202){
+            redraw();
         }
 
     }
@@ -74,9 +47,10 @@ public class MessagesActivity extends Activity {
     void redraw(){
         ApiAccess.setContext(this);
         System.out.println("Redrawing...");
-        ApiAccess.get("users/messages",
+        ApiAccess.get("messages/get/unread",
             response -> {
                 try {
+                    binding.messagesActivityId.removeAllViews();
                     JSONArray JSONArray_messages = response.getJSONArray("messages");
                     System.out.println(JSONArray_messages.length() + " this length");
                     for (int i = 0; i < JSONArray_messages.length(); i++){
@@ -96,7 +70,7 @@ public class MessagesActivity extends Activity {
                         String message_date = message.getString("created_at");
 
                         String txt = message_title.equals("null") ? message_text : message_title;
-                        message_btn.setText(message_text);
+                        message_btn.setText(txt);
                         message_btn.setGravity(Gravity.CENTER);
                         message_btn.setOnClickListener(view -> {
                             Intent intent = new Intent(MessagesActivity.this, MessageConfirmActivity.class);

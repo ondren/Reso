@@ -52,8 +52,8 @@ public class QrActivity extends Activity {
     }
 
     void redraw(){
-        ApiAccessQueryParams qp = new ApiAccessQueryParams("active", "1");
-        ApiAccess.get("codes/" + ApiAccess.getPlace(),
+        ApiAccessQueryParams qp = new ApiAccessQueryParams("active", "true");
+        ApiAccess.get("codes/" + ApiAccess.getPlace(), qp,
             response -> {
                 try {
                     binding.qrList.removeAllViews();
@@ -66,9 +66,10 @@ public class QrActivity extends Activity {
                         System.out.println(code.toString());
 
                         final Button button = new Button(this);
-                        button.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
+                        button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                150));
                         button.setId(i);
-                        button.setMinHeight(60);
+                        button.setMinHeight(80);
 
                         button.setLayoutParams(new ViewGroup.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,

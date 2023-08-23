@@ -22,13 +22,13 @@
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:text="Назад" />
 
             <Button
                 android:id="@+id/new_qr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:text="Добавить QR-код"
                 android:layout_marginBottom="40dp"
                 />
@@ -52,7 +52,7 @@
                 <Button
                     android:id="@+id/new_qr_refuse"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:text="Нет"
@@ -64,7 +64,7 @@
                 <Button
                     android:id="@+id/new_qr_confirm"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="80dp"
                     android:layout_marginEnd="12dp"
                     android:text="Да"
                     android:textColor="#4CAF50"

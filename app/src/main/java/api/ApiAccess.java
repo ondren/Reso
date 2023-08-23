@@ -128,6 +128,7 @@ public class ApiAccess {
         params.put("place", getPlace());
         System.out.println("place: " + getPlace());
         String url = getUrl(endpoint, params);
+        System.out.println("URL: " + url);
         final String requestBody = data == null ? "" : data.toString();
         StringRequest stringRequest = new StringRequest(
                 method,
