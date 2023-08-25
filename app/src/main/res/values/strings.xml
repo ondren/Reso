@@ -42,4 +42,9 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+
+    <string name="order_info_code">Код заказа: %1$s</string>
+    <string name="order_info_place">Место: %1$s</string>
+    <string name="order_info_name">Заказ: %1$s</string>
 </resources>

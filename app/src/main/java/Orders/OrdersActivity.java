@@ -24,6 +24,7 @@ public class OrdersActivity extends Activity {
     Button back_btn;
     LinearLayout layout;
     String code;
+    String comment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class OrdersActivity extends Activity {
             finish();
         });
         code = getIntent().getStringExtra("code");
+        comment = getIntent().getStringExtra("comment");
 
         redraw();
 
@@ -53,6 +55,8 @@ public class OrdersActivity extends Activity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject j = jsonArray.getJSONObject(i);
                     String order_id = j.getString("id");
+                    String comment = j.optString("comment");
+                    String place = j.optString("place");
                     System.out.println("order id  = "+order_id);
                     final Button order_id_btn = new Button(this);
                     order_id_btn.setLayoutParams(new LinearLayout.LayoutParams(350, 150));
@@ -62,12 +66,14 @@ public class OrdersActivity extends Activity {
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
                     ));
-                    order_id_btn.setText("Заказ: " + order_id);
+                    order_id_btn.setText("#" + order_id + ": " + place + "(" + comment +")");
                     order_id_btn.setGravity(Gravity.CENTER);
                     layout.addView(order_id_btn);
                     order_id_btn.setOnClickListener(view -> {
                         Intent intent = new Intent(OrdersActivity.this, OrderInfoActivity.class);
                         intent.putExtra("code",code);
+                        intent.putExtra("comment",comment);
+                        intent.putExtra("place",place);
                         intent.putExtra("order_id",order_id);
                         startActivityForResult(intent, 208);
                         int v;

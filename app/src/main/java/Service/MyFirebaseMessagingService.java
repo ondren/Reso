@@ -88,7 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setSmallIcon(R.drawable.ic_stat_notification)
                         .setContentTitle(title)
                         .setContentText(messageBody)
-                        .setVibrate(VibrateUtil.DEFAULT_VIBRATION_PATTERN)
+                        .setVibrate(VibrateUtil.IMPORTANT_VIBRATION_PATTERN)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);

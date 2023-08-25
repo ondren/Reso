@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import Orders.OrdersActivity;
 
+import com.example.myapplication.R;
 import com.example.myapplication.databinding.QrSettingsActivityBinding;
 
 import org.json.JSONArray;
@@ -49,6 +50,7 @@ public class QRSettingsActivity extends Activity {
         binding.ordersBtn.setOnClickListener(view -> {
             Intent intent = new Intent(QRSettingsActivity.this, OrdersActivity.class);
             intent.putExtra("code", code);
+            intent.putExtra("comment", comment);
             startActivityForResult(intent, 400);
         });
         binding.backBtn.setOnClickListener(view -> {
@@ -142,15 +144,15 @@ public class QRSettingsActivity extends Activity {
         ApiAccess.setContext(this);
         HashMap<String, String> params = new HashMap<>();
         params.put("code", code);
-
+        System.out.println(code);
 
         ApiAccess.get("codes/" + ApiAccess.getPlace() + "/" + code, params,
             response -> {
                 try {
                     JSONObject _code = response.getJSONObject("item");
-                    link = _code.isNull("link") ? "" : _code.getString("link");
-                    comment = _code.isNull("comment") ? "" : _code.getString("comment");
-                    waiter_id = _code.isNull("waiter_id") ? 0 : _code.getInt("waiter_id");
+                    link = _code.optString("link", "");
+                    comment = _code.optString("comment", "");
+                    waiter_id = _code.optInt("waiter_id", 0);
                     if(waiter_id > 0)
                         binding.btnSetMeWaiter.setText("Официант назначен");
                     else
@@ -169,7 +171,7 @@ public class QRSettingsActivity extends Activity {
             String c = code.toString();
             String closed_at = code.optString("closed_at", "");
             String comment = code.optString("comment","");
-            boolean code_closed = !(closed_at == null || closed_at.equals("") || closed_at.equals("null"));
+            boolean code_closed = !(closed_at.equals("") || closed_at.equals("null"));
 
             TextView t = new TextView(this);
             t.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -195,6 +197,14 @@ public class QRSettingsActivity extends Activity {
                     to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     to.setText("Заказ " + order.getString("order_id"));
+                    binding.infoList.addView(to);
+
+                    to = new TextView(this);
+                    to.setTypeface(null, Typeface.BOLD);
+                    to.setPadding(0, 20, 0,0);
+                    to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    to.setText(getResources().getString(R.string.order_info_place, order.getString("place")));
                     binding.infoList.addView(to);
 
 //                    to = new TextView(this);

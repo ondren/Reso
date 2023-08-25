@@ -37,6 +37,7 @@ public class QrCreateActivity extends Activity {
             try {
                 JSONObject code_data = new JSONObject();
                 code_data.put("comment", comment);
+                code_data.put("meAsWaiter", 1);
                 ApiAccess.post("codes/" + ApiAccess.getPlace(), code_data,
                     response -> {
                         try {

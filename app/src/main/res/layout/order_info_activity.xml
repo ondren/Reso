@@ -6,30 +6,30 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text="Назад" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/order_info"
-                />
+                android:orientation="vertical"
+                android:id="@+id/order_info_list">
 
+
+            </LinearLayout>
             <Button
                 android:id="@+id/take_order_id"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Привязать заказ" />
         </LinearLayout>
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
