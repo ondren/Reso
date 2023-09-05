@@ -46,5 +46,6 @@
 
     <string name="order_info_code">Код заказа: %1$s</string>
     <string name="order_info_place">Место: %1$s</string>
+    <string name="order_info_comment">Комментарий: %1$s</string>
     <string name="order_info_name">Заказ: %1$s</string>
 </resources>

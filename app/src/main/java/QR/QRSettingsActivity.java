@@ -189,7 +189,7 @@ public class QRSettingsActivity extends Activity {
             if(orders != null && orders.length() > 0){
                 for (int i = 0; i < orders.length(); i++) {
                     JSONObject order = orders.getJSONObject(i);
-                    JSONObject data = order.has("data") ?  order.getJSONObject("data"): null;
+                    JSONObject data = order.has("data") ?  order.getJSONObject("data"): new JSONObject();
 
                     TextView to = new TextView(this);
                     to.setTypeface(null, Typeface.BOLD);
@@ -200,11 +200,15 @@ public class QRSettingsActivity extends Activity {
                     binding.infoList.addView(to);
 
                     to = new TextView(this);
-                    to.setTypeface(null, Typeface.BOLD);
-                    to.setPadding(0, 20, 0,0);
                     to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    to.setText(getResources().getString(R.string.order_info_place, order.getString("place")));
+                    to.setText(getResources().getString(R.string.order_info_place, data.optString("place")));
+                    binding.infoList.addView(to);
+
+                    to = new TextView(this);
+                    to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    to.setText(getResources().getString(R.string.order_info_comment, data.optString("comment")));
                     binding.infoList.addView(to);
 
 //                    to = new TextView(this);
