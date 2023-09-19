@@ -32,6 +32,7 @@ import api.ApiAccess;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+
     @Override
     public void onNewToken(@NonNull String token) {
         System.out.println("Refreshed token: " + token);
@@ -53,6 +54,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         System.out.println("From: " + remoteMessage.getFrom());
         String message = remoteMessage.getData().get("body");
         String title = remoteMessage.getData().get("title");
+        String channel = remoteMessage.getData().get("channel_id");
 
 
         // Check if message contains a notification payload.
@@ -63,7 +65,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
         sendNotification(remoteMessage.getFrom() + " -> " + message);
-        sendNotification(message, title);
+        sendNotification(message, title, channel);
         int v = 0;
     }
 
@@ -75,13 +77,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
-    private void sendNotification(String messageBody, String title) {
+    private void sendNotification(String messageBody, String title, String channelId) {
         Intent intent = new Intent(this, MessagesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
 
-        String channelId = "chanelID";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
@@ -93,6 +94,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationBuilder.setPriority(NotificationManager.IMPORTANCE_MAX);
+        } else {
+            notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        }
+        if(channelId == "message_default"){
+            notificationBuilder.setVibrate(VibrateUtil.SMALL_MESSAGE_VIBRATION_PATTERN);
+        } else{
+            notificationBuilder.setVibrate(VibrateUtil.IMPORTANT_VIBRATION_PATTERN);
+        }
+
+
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -101,7 +114,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
 

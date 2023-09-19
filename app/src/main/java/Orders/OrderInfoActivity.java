@@ -67,16 +67,18 @@ public class OrderInfoActivity extends Activity {
                     to.setText(getResources().getString(R.string.order_info_name, order.optString("comment")));
                     binding.orderInfoList.addView(to); to = new TextView(this);
 
+                    to = new TextView(this);
                     to.setPadding(0, 20, 0,0);
                     to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     to.setText(getResources().getString(R.string.order_info_code, order.optString("id")));
                     binding.orderInfoList.addView(to);
 
+                    to = new TextView(this);
                     to.setPadding(0, 20, 0,0);
                     to.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     to.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    to.setText(getResources().getString(R.string.order_info_place, order.optString("place")));
+                    to.setText(getResources().getString(R.string.order_info_place, order.optString("place", "-")));
                     binding.orderInfoList.addView(to);
 
                     JSONArray positions =  order.optJSONArray("positions");

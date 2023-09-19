@@ -25,6 +25,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:text="Сообщения" />
+            <Button
+                android:id="@+id/dish_btn"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Оповещения" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.myapplication.databinding.HubActivityBinding;
 
 import Messages.MessagesActivity;
+import Messages.UnimportantMessagesActivity;
 import Orders.QrCreateActivity;
 import QR.QrActivity;
 import Reservations.ReservationsActivity;
@@ -48,6 +49,10 @@ public class HubActivity extends Activity {
     void initBtns(){
         binding.chatBtn.setOnClickListener((l)->{
             Intent intent = new Intent(HubActivity.this, MessagesActivity.class);
+            startActivity(intent);
+        });
+        binding.dishBtn.setOnClickListener((l)->{
+            Intent intent = new Intent(HubActivity.this, UnimportantMessagesActivity.class);
             startActivity(intent);
         });
         binding.qrBtn.setOnClickListener((l)->{
