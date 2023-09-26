@@ -18,6 +18,7 @@ import Orders.QrCreateActivity;
 import QR.QrActivity;
 import Reservations.ReservationsActivity;
 import Service.MyService;
+import api.ApiAccess;
 
 public class HubActivity extends Activity {
     SharedPreferences sp;
@@ -62,6 +63,20 @@ public class HubActivity extends Activity {
         binding.qrNewBtn.setOnClickListener((l)->{
             Intent intent = new Intent(HubActivity.this, QrCreateActivity.class);
             startActivityForResult(intent, 300);
+        });
+
+        binding.firebaseCheckBtn.setOnLongClickListener((l)->{
+            ApiAccess.setContext(this);
+            String endpoint = "users/" + ApiAccess.getPlace() + "/firebaseCheck";
+            binding.firebaseCheckBtn.setText("Отправляем запрос...");
+            ApiAccess.get(endpoint,
+                    (data)->{
+                        binding.firebaseCheckBtn.setText("Проверка Firebase");
+                    },
+                    error->{
+                        binding.firebaseCheckBtn.setText("Проверка Firebase");
+                    });
+            return true;
         });
         binding.exitBtn.setOnClickListener((l)->{
             SharedPreferences.Editor editor = sp.edit();

@@ -63,10 +63,10 @@
 
 
             <Button
-                android:id="@+id/tables_btn"
+                android:id="@+id/firebase_check_btn"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="Столы" />
+                android:text="Тест firebase" />
             <Button
                 android:id="@+id/exit_btn"
                 android:layout_width="match_parent"

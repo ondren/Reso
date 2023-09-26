@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import api.ApiAccess;
+import components.MessageConfirmView;
 
 public class MessagesActivity extends Activity {
     MessagesActivityBinding binding;
@@ -82,7 +83,11 @@ public class MessagesActivity extends Activity {
                             startActivityForResult(intent, 202);
 
                         });
-                        binding.messagesActivityId.addView(message_btn);
+//                        binding.messagesActivityId.addView(message_btn);
+                        MessageConfirmView mv = new MessageConfirmView(MessagesActivity.this);
+                        mv.setData(message_code, message_title, message_text, message_date);
+
+                        binding.messagesActivityId.addView(mv);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
